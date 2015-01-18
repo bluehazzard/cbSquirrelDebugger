@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc">
+	<object class="wxPanel" name="dlgSquirrelDebuggerOptions">
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxRadioBox" name="DebugEngine">
+					<label>Debugger Engine</label>
+					<content>
+						<item>cb_sqdbg</item>
+					</content>
+					<style>wxRA_SPECIFY_ROWS</style>
+				</object>
+				<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND|wxALIGN_LEFT|wxALIGN_TOP</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT2">
+							<label>IP address:</label>
+						</object>
+						<flag>wxRIGHT|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_target_ip" />
+						<flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT3">
+							<label>Port:</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_target_port" />
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND|wxALIGN_LEFT|wxALIGN_TOP</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStaticBoxSizer">
+					<label>Debugger intialization commands</label>
+					<orient>wxVERTICAL</orient>
+				</object>
+				<flag>wxLEFT|wxRIGHT|wxEXPAND|wxALIGN_LEFT|wxALIGN_TOP</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</resource>

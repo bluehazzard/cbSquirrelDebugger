@@ -1,0 +1,10 @@
+
+.objs/
+*.layout
+SquirrelDebugger-unix_build_log.html
+*.cbplugin
+SquirrelDebugger.zip
+
+
+SquirrelDebugger-unix.depend
+SquirrelDebugger-unix.bmarks
