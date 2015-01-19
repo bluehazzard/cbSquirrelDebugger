@@ -79,6 +79,15 @@ wxString PrintNiceValueFromSquirrelObject(SquirrelObjectsSet obj_set, int refere
  */
 SquirrelWatch::Pointer FindWatch(long id, SquirrelWatchesContainer &container);
 
+/** \brief Find a watch with the corresponding symbol name in the container
+ *
+ * \param symbol wxString  The symbol of the watch
+ * \param container SquirrelWatchesContainer&   Container that stores all watches
+ * \return SquirrelWatch::Pointer   Empty Pointer or the found value
+ *
+ */
+SquirrelWatch::Pointer FindWatch(const wxString& symbol, SquirrelWatchesContainer &container);
+
 /** \brief return the iterator of the breakpoint in the list (if not found lst.end())
  *
  * \param bp const SqBreakpoint&    Breakpoint to find

@@ -199,6 +199,21 @@ SquirrelWatch::Pointer FindWatch(long id, SquirrelWatchesContainer &container)
     {
         if((*itr)->GetNumID() == id)
             return (*itr);
+        // TODO (bluehazzard#1#): Search also in children
+    }
+    return SquirrelWatch::Pointer();
+}
+
+SquirrelWatch::Pointer FindWatch(const wxString& symbol, SquirrelWatchesContainer &container)
+{
+    SquirrelWatchesContainer::iterator itr = container.begin();
+    for(;itr!=container.end();++itr)
+    {
+        wxString s;
+        (*itr)->GetSymbol(s);
+        if(s == symbol)
+            return (*itr);
+        // TODO (bluehazzard#1#): Search also in children
     }
     return SquirrelWatch::Pointer();
 }

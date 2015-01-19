@@ -537,7 +537,7 @@ bool SquirrelDebugger::SupportsFeature(cbDebuggerFeature::Flags f)
         case cbDebuggerFeature::Breakpoints:
         case cbDebuggerFeature::Callstack:
         case cbDebuggerFeature::Watches:
-        //case cbDebuggerFeature::ValueTooltips:
+        case cbDebuggerFeature::ValueTooltips:
 //        case cbDebuggerFeature::Threads:
         case cbDebuggerFeature::RunToCursor:
 //        case cbDebuggerFeature::SetNextStatement:
@@ -1348,9 +1348,32 @@ void SquirrelDebugger::OnValueTooltip(CodeBlocksEvent& event)
     if (token.IsEmpty())
         return;
 
-    wxString cmd;
-    cmd+=_T("pw ")+token+_T("\n");
-//    DispatchCommands(cmd,DBGCMDTYPE_WATCHTOOLTIP,true);
+    // in token is the safed value
+
     m_watch_tooltip_pos=pos;
+
+    SquirrelStackFrame::Pointer f = m_stackinfo.frames[m_stackinfo.activeframe];
+    cb::shared_ptr<cbWatch> child = f->m_locals->FindChild(token);
+
+    if(!child)  // Search also in the watches
+        child = f->m_watches->FindChild(token);
+
+    wxString tooltip;
+    tooltip << _("Not found, please add as watch and make one step");
+    if(child)
+    {
+        SquirrelWatch::Pointer  watch = std::tr1::dynamic_pointer_cast<SquirrelWatch>(child);
+        if(watch)
+        {
+            wxString s,t,v;
+            watch->GetSymbol(s);
+            watch->GetType(t);
+            watch->GetValue(v);
+            tooltip.clear();
+            tooltip << s << wxT(":") << t << wxT(" = ") << v;
+        }
+    }
+
+    SetWatchTooltip(tooltip,tooltip.Len());
 }
 
