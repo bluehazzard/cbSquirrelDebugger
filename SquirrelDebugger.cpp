@@ -193,6 +193,9 @@ int SquirrelDebugger::ProcessResponse(wxString &resp)
     }
     else if(root_name == wxT("break"))
     {
+        // We have received something that needs user interaction, so we will bring c::b in front
+        BringCBToFront();
+
         recv_cmd = SQDBG_CMD_FLOW_CTRL;
         m_stopped = true;
         // The debugger signaled a break
@@ -235,7 +238,11 @@ int SquirrelDebugger::ProcessResponse(wxString &resp)
             // we encountered an error
             wxString error_msg = root_node->GetAttribute(wxT("error"),wxT("No \"error\" attribute found"));
             m_DebugLog->Append(_("*** Unhandled throw found:")+error_msg);
-            cbMessageBox(_("Unhandled throw found:\n")+error_msg,_("Error"),wxOK|wxICON_ERROR);
+
+            // Show the backtrace window if a not handled throw has been found
+            Manager::Get()->GetDebuggerManager()->ShowBacktraceDialog();
+            // Inform the user with a nice popup window
+            InfoWindow::Display(_("Unhandled throw found:\n"),error_msg + _T("\n\nIn:") + src + _T("\n\n"));
         }
         else
         {

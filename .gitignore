@@ -4,7 +4,6 @@
 SquirrelDebugger-unix_build_log.html
 *.cbplugin
 SquirrelDebugger.zip
+*.depend
+*.bmarks
 
-
-SquirrelDebugger-unix.depend
-SquirrelDebugger-unix.bmarks
