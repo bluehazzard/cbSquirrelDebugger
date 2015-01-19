@@ -138,6 +138,9 @@ void SquirrelDebugger::StopDebugging()
     PluginManager *plm = Manager::Get()->GetPluginManager();
     CodeBlocksEvent evt(cbEVT_DEBUGGER_PAUSED);
     plm->NotifyPlugins(evt);
+
+    // switch to old Layout
+    SwitchToPreviousLayout();
 }
 
 int SquirrelDebugger::ProcessResponse(wxString &resp)
@@ -818,6 +821,9 @@ bool SquirrelDebugger::Debug(bool breakOnEntry)
     m_connected = true;
 
     m_DebugLog->Append(_("*** Connected to ") + address_string);
+
+    // Te debugger has started, so lets switch to appropriate layout
+    SwitchToDebuggingLayout();
 
 
     //wxSetWorkingDirectory(olddir);
