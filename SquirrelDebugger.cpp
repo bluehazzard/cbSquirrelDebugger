@@ -1,3 +1,8 @@
+/*
+ * This file is part of the cbSquirrelDebugger and licensed under the GNU Lesser General Public License, version 3
+ * http://www.gnu.org/licenses/lgpl-3.0.html
+ */
+
 #include "SquirrelDebugger.h"
 #include <configurationpanel.h>
 #include <wx/regex.h>
@@ -7,7 +12,6 @@
 #include <wx/sstream.h>
 #include <wx/progdlg.h>
 #include "utils.h"
-//#include <watchesdlg.h>
 
 // Register the plugin with Code::Blocks.
 // We are using an anonymous namespace so we don't litter the global one.
