@@ -6,4 +6,5 @@ SquirrelDebugger-unix_build_log.html
 SquirrelDebugger.zip
 *.depend
 *.bmarks
+*.so
 
