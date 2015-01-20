@@ -96,14 +96,16 @@
 			<Add option="-DCB_PRECOMP" />
 			<Add option="-DWX_PRECOMP" />
 		</Compiler>
+		<Unit filename="Resources/debugger_options_dlg.xrc" />
 		<Unit filename="SquirrelDebugger.cpp" />
 		<Unit filename="SquirrelDebugger.h" />
-		<Unit filename="Resources/debugger_options_dlg.xrc" />
 		<Unit filename="debuggeroptionsdlg.cpp" />
 		<Unit filename="debuggeroptionsdlg.h" />
 		<Unit filename="manifest.xml">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="utils.cpp" />
+		<Unit filename="utils.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
