@@ -848,7 +848,7 @@ bool SquirrelDebugger::Debug(bool breakOnEntry)
 
 void SquirrelDebugger::Continue()
 {
-    if(m_DebuggerActive)
+    if(m_DebuggerActive&& m_stopped)
     {
         m_DebugLog->Append(wxT("*** continue"));
         QueueCommand(_T("go"),SQDBG_CMD_RESUME,false);
@@ -857,7 +857,7 @@ void SquirrelDebugger::Continue()
 
 void SquirrelDebugger::Next()
 {
-    if(m_DebuggerActive)
+    if(m_DebuggerActive&& m_stopped)
     {
         m_DebugLog->Append(wxT("*** next"));
         QueueCommand(_T("so"),SQDBG_CMD_STEP_OVER,false);
@@ -872,7 +872,7 @@ void SquirrelDebugger::NextInstruction()
 
 void SquirrelDebugger::Step()
 {
-    if(m_DebuggerActive)
+    if(m_DebuggerActive && m_stopped)
     {
         m_DebugLog->Append(wxT("*** Step into"));
         QueueCommand(_T("si"),SQDBG_CMD_STEP_INTO,false);
@@ -881,7 +881,7 @@ void SquirrelDebugger::Step()
 
 void SquirrelDebugger::StepIntoInstruction()
 {
-    if(m_DebuggerActive)
+    if(m_DebuggerActive && m_stopped)
     {
         m_DebugLog->Append(wxT("*** Step into"));
         QueueCommand(_T("si"),SQDBG_CMD_STEP_INTO,false);
@@ -890,7 +890,7 @@ void SquirrelDebugger::StepIntoInstruction()
 
 void SquirrelDebugger::StepOut()
 {
-    if(m_DebuggerActive)
+    if(m_DebuggerActive && m_stopped)
     {
         m_DebugLog->Append(wxT("*** Step out"));
         QueueCommand(_T("sr"),SQDBG_CMD_STEP_INTO,false);
@@ -913,8 +913,11 @@ void SquirrelDebugger::Stop()
 {
     if(m_DebuggerActive)
     {
+        //Terminate should always work, so lets clear the output queue, and the command queue
+        m_DispatchedCommands.clear();
+        m_CommandQueue.clear();
         m_DebugLog->Append(wxT("*** Terminate"));
-        QueueCommand(_T("tr"),SQDBG_CMD_TERMINATE,false);
+        QueueCommand(_T("tr"),SQDBG_CMD_TERMINATE,false);   // no waiting for this command
         StopDebugging();
     }
     m_RunTarget=_("");
