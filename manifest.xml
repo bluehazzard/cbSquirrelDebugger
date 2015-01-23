@@ -7,7 +7,7 @@
         <Value description="An interactive debugger for squirrel scripts using sqdbg as a backend" />
         <Value author="Bluehazzard" />
         <Value authorEmail="" />
-        <Value authorWebsite="" />
+        <Value authorWebsite="https://github.com/bluehazzard/cbSquirrelDebugger" />
         <Value thanksTo="" />
         <Value license="GPL" />
     </Plugin>
