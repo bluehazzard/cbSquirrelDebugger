@@ -18,6 +18,8 @@
 
     #include <configmanager.h>
     #include <macrosmanager.h>
+
+    #include <wx/socket.h>
 #endif
 
 

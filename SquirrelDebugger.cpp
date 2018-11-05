@@ -12,6 +12,11 @@
 #include <wx/sstream.h>
 #include <wx/progdlg.h>
 #include "utils.h"
+#include "infowindow.h"
+#include "editormanager.h"
+#include "logmanager.h"
+#include "cbeditor.h"
+#include "debuggermanager.h"
 
 // Register the plugin with Code::Blocks.
 // We are using an anonymous namespace so we don't litter the global one.
@@ -384,6 +389,8 @@ int SquirrelDebugger::ProcessResponse(wxString &resp)
                                 old_watch->SetType(var_type);
                                 old_watch->SetValue(var_value);
                                 cbWatch::AddChild(f->m_locals,old_watch);
+                                //old_watch->m_parent = f->m_locals;
+                                //f->m_locals->m_children.push_back(old_watch);
                             }
                             else
                             {
@@ -445,7 +452,7 @@ int SquirrelDebugger::ProcessResponse(wxString &resp)
                                         watch->GetSymbol(watch_sym);
                                         f->m_watches->GetChild(i)->GetSymbol(child_sym);
                                         if(child_sym== watch_sym)
-                                            old_child = std::tr1::dynamic_pointer_cast<SquirrelWatch>(f->m_watches->GetChild(i));
+                                            old_child = std::dynamic_pointer_cast<SquirrelWatch>(f->m_watches->GetChild(i));
                                     }
                                     if(old_child)
                                     {
@@ -455,6 +462,9 @@ int SquirrelDebugger::ProcessResponse(wxString &resp)
                                     else
                                     {
                                         cbWatch::AddChild(f->m_watches,watch);
+                                        //watch->m_parent = f->m_watches;
+                                        //f->m_watches->m_children.push_back(watch);
+
                                     }
                                 }
                                 else
@@ -482,6 +492,11 @@ int SquirrelDebugger::ProcessResponse(wxString &resp)
         // Update the Call stack
         DebuggerManager &dbg_manager = *Manager::Get()->GetDebuggerManager();
         dbg_manager.GetBacktraceDialog()->Reload();
+        if(m_stackinfo.frames.size() == 0 || m_stackinfo.activeframe >=  m_stackinfo.frames.size())
+        {
+            // No valid stack frame found
+            return 0;
+        }
         m_stackinfo.frames[m_stackinfo.activeframe]->m_locals->Expand(true);
         dbg_manager.GetWatchesDialog()->AddWatch(m_stackinfo.frames[m_stackinfo.activeframe]->m_locals);
         dbg_manager.GetWatchesDialog()->UpdateWatches();
@@ -1101,7 +1116,8 @@ bool SquirrelDebugger::HasWatch(cb::shared_ptr<cbWatch> watch)
         if (m_watchlist[i]==watch)
             return true;
     }
-    return watch = m_locals_watch;
+    //return watch = m_locals_watch;
+    return false;
 }
 
 void SquirrelDebugger::ShowWatchProperties(cb::shared_ptr<cbWatch> watch)
@@ -1369,7 +1385,7 @@ void SquirrelDebugger::OnValueTooltip(CodeBlocksEvent& event)
     tooltip << _("Not found, please add as watch and make one step");
     if(child)
     {
-        SquirrelWatch::Pointer  watch = std::tr1::dynamic_pointer_cast<SquirrelWatch>(child);
+        SquirrelWatch::Pointer  watch = std::dynamic_pointer_cast<SquirrelWatch>(child);
         if(watch)
         {
             wxString s,t,v;

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SquirrelDebugger" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="SquirrelDebugger" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".objs/default" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option host_application="$(#cb)/devel30/codeblocks.exe" />
+				<Option run_host_application_in_terminal="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="$(#wx30.include)" />
+					<Add directory="$(#wx30.lib)/gcc_dll/mswu" />
+				</Compiler>
+				<Linker>
+					<Add library="wxmsw30u" />
+					<Add library="codeblocks" />
+					<Add directory="$(#wx30.lib)/gcc_dll" />
+					<Add directory="$(#cb)/devel30" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 SquirrelDebugger.zip manifest.xml Resources\*.xrc" />
+					<Add after="zip -j9 SquirrelDebugger.cbplugin SquirrelDebugger.dll SquirrelDebugger.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="to_codeblocks_wx28">
+				<Option output="$(#cb)/devel/share/codeblocks/plugins/SquirrelDebugger" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".objs/to_codeblocks_wx28" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option parameters="--debug-log --multiple-instance --no-splash-screen --verbose -p debug --no-dde --no-check-associations " />
+				<Option host_application="$(#cb)/devel/codeblocks.exe" />
+				<Option run_host_application_in_terminal="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="$(#wx.include)" />
+					<Add directory="$(#wx.lib)/gcc_dll/mswu" />
+				</Compiler>
+				<Linker>
+					<Add library="wxmsw28u" />
+					<Add library="codeblocks" />
+					<Add directory="$(#wx.lib)/gcc_dll" />
+					<Add directory="$(#cb)/devel" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 $(#cb)\devel/share/codeblocks/SquirrelDebugger.zip manifest.xml Resources\*.xrc" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="to_codeblocks_wx30">
+				<Option output="$(#cb)/devel30/share/codeblocks/plugins/SquirrelDebugger" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".objs/to_codeblocks_wx30" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option parameters="--debug-log --multiple-instance --no-splash-screen --verbose -p debug --no-dde --no-check-associations " />
+				<Option host_application="$(#cb)/devel30/codeblocks.exe" />
+				<Option run_host_application_in_terminal="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="$(#wx30.include)" />
+					<Add directory="$(#wx30.lib)/gcc_dll/mswu" />
+				</Compiler>
+				<Linker>
+					<Add library="wxmsw30u" />
+					<Add library="codeblocks" />
+					<Add directory="$(#wx30.lib)/gcc_dll" />
+					<Add directory="$(#cb)/devel30" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 $(#cb)\devel30/share/codeblocks/SquirrelDebugger.zip manifest.xml Resources\*.xrc" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="All" targets="default;to_codeblocks_wx28;to_codeblocks_wx30;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-DBUILDING_PLUGIN" />
+			<Add option="-DHAVE_W32API_H" />
+			<Add option="-D__WXMSW__" />
+			<Add option="-DWXUSINGDLL" />
+			<Add option="-DcbDEBUG" />
+			<Add option="-DCB_PRECOMP" />
+			<Add option="-DWX_PRECOMP" />
+			<Add option="-DwxUSE_UNICODE" />
+			<Add option="-pipe" />
+			<Add option="-mthreads" />
+			<Add option="-fmessage-length=0" />
+			<Add option="-fexceptions" />
+			<Add option="-Winvalid-pch" />
+			<Add option="-std=gnu++11" />
+			<Add directory="$(#cb)/include" />
+			<Add directory="$(#cb)/sdk/wxscintilla/include" />
+			<Add directory="$(#cb)/include/tinyxml" />
+		</Compiler>
+		<Linker>
+			<Add option="-mthreads" />
+		</Linker>
+		<Unit filename="Resources/debugger_options_dlg.xrc" />
+		<Unit filename="SquirrelDebugger.cpp" />
+		<Unit filename="SquirrelDebugger.h" />
+		<Unit filename="debuggeroptionsdlg.cpp" />
+		<Unit filename="debuggeroptionsdlg.h" />
+		<Unit filename="manifest.xml" />
+		<Unit filename="utils.cpp" />
+		<Unit filename="utils.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

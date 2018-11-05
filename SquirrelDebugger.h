@@ -23,6 +23,7 @@
 #include <loggers.h>
 #include <logger.h>
 #include <sdk.h>
+#include <list>
 
 #include <debuggermanager.h>
 #include "debuggeroptionsdlg.h"
@@ -260,7 +261,6 @@ class CompareSquirrelObjectsPointer { // simple comparison function
 
 typedef std::set<SquirrelObjects::Pointer,CompareSquirrelObjectsPointer> SquirrelObjectsSet;
 
-
 class SquirrelStackFrame : public cbStackFrame
 {
     public:
@@ -270,7 +270,7 @@ class SquirrelStackFrame : public cbStackFrame
     };
     ~SquirrelStackFrame() {};
 
-    typedef cb::shared_ptr<SquirrelStackFrame> Pointer;
+    typedef std::shared_ptr<SquirrelStackFrame> Pointer;
 
     bool operator<(const SquirrelStackFrame &other) const
     {
